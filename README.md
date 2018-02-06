@@ -1,4 +1,4 @@
 # springCloud
 
 
-springCloud spring boot   spring sercurity   mybatis  mysql  mongodb  es  
+springCloud spring boot   spring sercurity   mybatis mybatis-generator  mysql  mongodb  es  
