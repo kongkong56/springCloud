@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxcs.mybatis.mapper.auto.CMFenjiLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lxcs.mybatis.bean.auto.CMFenjiLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="extension_number" property="extensionNumber" jdbcType="VARCHAR" />
+    <result column="fenji_number" property="fenjiNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="last_user_id" property="lastUserId" jdbcType="VARCHAR" />
+    <result column="last_user_name" property="lastUserName" jdbcType="VARCHAR" />
+    <result column="department_top_cd" property="departmentTopCd" jdbcType="VARCHAR" />
+    <result column="department_top_name" property="departmentTopName" jdbcType="VARCHAR" />
+    <result column="last_department_top_cd" property="lastDepartmentTopCd" jdbcType="VARCHAR" />
+    <result column="last_department_top_name" property="lastDepartmentTopName" jdbcType="VARCHAR" />
+    <result column="is_used" property="isUsed" jdbcType="CHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="INTEGER" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, extension_number, fenji_number, user_id, user_name, last_user_id, last_user_name, 
+    department_top_cd, department_top_name, last_department_top_cd, last_department_top_name, 
+    is_used, create_user_id, create_date, create_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lxcs.mybatis.bean.auto.CMFenjiLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_m_fenji_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_m_fenji_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_m_fenji_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxcs.mybatis.bean.auto.CMFenjiLogExample" >
+    delete from c_m_fenji_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxcs.mybatis.bean.auto.CMFenjiLog" >
+    insert into c_m_fenji_log (id, extension_number, fenji_number, 
+      user_id, user_name, last_user_id, 
+      last_user_name, department_top_cd, department_top_name, 
+      last_department_top_cd, last_department_top_name, 
+      is_used, create_user_id, create_date, 
+      create_name)
+    values (#{id,jdbcType=INTEGER}, #{extensionNumber,jdbcType=VARCHAR}, #{fenjiNumber,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{lastUserId,jdbcType=VARCHAR}, 
+      #{lastUserName,jdbcType=VARCHAR}, #{departmentTopCd,jdbcType=VARCHAR}, #{departmentTopName,jdbcType=VARCHAR}, 
+      #{lastDepartmentTopCd,jdbcType=VARCHAR}, #{lastDepartmentTopName,jdbcType=VARCHAR}, 
+      #{isUsed,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=INTEGER}, 
+      #{createName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxcs.mybatis.bean.auto.CMFenjiLog" >
+    insert into c_m_fenji_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="extensionNumber != null" >
+        extension_number,
+      </if>
+      <if test="fenjiNumber != null" >
+        fenji_number,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="lastUserId != null" >
+        last_user_id,
+      </if>
+      <if test="lastUserName != null" >
+        last_user_name,
+      </if>
+      <if test="departmentTopCd != null" >
+        department_top_cd,
+      </if>
+      <if test="departmentTopName != null" >
+        department_top_name,
+      </if>
+      <if test="lastDepartmentTopCd != null" >
+        last_department_top_cd,
+      </if>
+      <if test="lastDepartmentTopName != null" >
+        last_department_top_name,
+      </if>
+      <if test="isUsed != null" >
+        is_used,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="extensionNumber != null" >
+        #{extensionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fenjiNumber != null" >
+        #{fenjiNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUserId != null" >
+        #{lastUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUserName != null" >
+        #{lastUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTopCd != null" >
+        #{departmentTopCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTopName != null" >
+        #{departmentTopName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDepartmentTopCd != null" >
+        #{lastDepartmentTopCd,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDepartmentTopName != null" >
+        #{lastDepartmentTopName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsed != null" >
+        #{isUsed,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxcs.mybatis.bean.auto.CMFenjiLogExample" resultType="java.lang.Integer" >
+    select count(*) from c_m_fenji_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_m_fenji_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.extensionNumber != null" >
+        extension_number = #{record.extensionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fenjiNumber != null" >
+        fenji_number = #{record.fenjiNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUserId != null" >
+        last_user_id = #{record.lastUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUserName != null" >
+        last_user_name = #{record.lastUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentTopCd != null" >
+        department_top_cd = #{record.departmentTopCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentTopName != null" >
+        department_top_name = #{record.departmentTopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastDepartmentTopCd != null" >
+        last_department_top_cd = #{record.lastDepartmentTopCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastDepartmentTopName != null" >
+        last_department_top_name = #{record.lastDepartmentTopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isUsed != null" >
+        is_used = #{record.isUsed,jdbcType=CHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=INTEGER},
+      </if>
+      <if test="record.createName != null" >
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_m_fenji_log
+    set id = #{record.id,jdbcType=INTEGER},
+      extension_number = #{record.extensionNumber,jdbcType=VARCHAR},
+      fenji_number = #{record.fenjiNumber,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      last_user_id = #{record.lastUserId,jdbcType=VARCHAR},
+      last_user_name = #{record.lastUserName,jdbcType=VARCHAR},
+      department_top_cd = #{record.departmentTopCd,jdbcType=VARCHAR},
+      department_top_name = #{record.departmentTopName,jdbcType=VARCHAR},
+      last_department_top_cd = #{record.lastDepartmentTopCd,jdbcType=VARCHAR},
+      last_department_top_name = #{record.lastDepartmentTopName,jdbcType=VARCHAR},
+      is_used = #{record.isUsed,jdbcType=CHAR},
+      create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=INTEGER},
+      create_name = #{record.createName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxcs.mybatis.bean.auto.CMFenjiLog" >
+    update c_m_fenji_log
+    <set >
+      <if test="extensionNumber != null" >
+        extension_number = #{extensionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fenjiNumber != null" >
+        fenji_number = #{fenjiNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUserId != null" >
+        last_user_id = #{lastUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUserName != null" >
+        last_user_name = #{lastUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTopCd != null" >
+        department_top_cd = #{departmentTopCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTopName != null" >
+        department_top_name = #{departmentTopName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDepartmentTopCd != null" >
+        last_department_top_cd = #{lastDepartmentTopCd,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDepartmentTopName != null" >
+        last_department_top_name = #{lastDepartmentTopName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsed != null" >
+        is_used = #{isUsed,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxcs.mybatis.bean.auto.CMFenjiLog" >
+    update c_m_fenji_log
+    set extension_number = #{extensionNumber,jdbcType=VARCHAR},
+      fenji_number = #{fenjiNumber,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      last_user_id = #{lastUserId,jdbcType=VARCHAR},
+      last_user_name = #{lastUserName,jdbcType=VARCHAR},
+      department_top_cd = #{departmentTopCd,jdbcType=VARCHAR},
+      department_top_name = #{departmentTopName,jdbcType=VARCHAR},
+      last_department_top_cd = #{lastDepartmentTopCd,jdbcType=VARCHAR},
+      last_department_top_name = #{lastDepartmentTopName,jdbcType=VARCHAR},
+      is_used = #{isUsed,jdbcType=CHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=INTEGER},
+      create_name = #{createName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

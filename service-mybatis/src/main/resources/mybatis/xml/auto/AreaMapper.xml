@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxcs.mybatis.mapper.auto.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.lxcs.mybatis.bean.auto.Area" >
+    <id column="code" property="code" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="isprovince" property="isprovince" jdbcType="INTEGER" />
+    <result column="iscity" property="iscity" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    code, `name`, isprovince, iscity
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lxcs.mybatis.bean.auto.AreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_m_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_m_area
+    where code = #{code,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from c_m_area
+    where code = #{code,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxcs.mybatis.bean.auto.AreaExample" >
+    delete from c_m_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxcs.mybatis.bean.auto.Area" >
+    insert into c_m_area (code, `name`, isprovince, 
+      iscity)
+    values (#{code,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{isprovince,jdbcType=INTEGER}, 
+      #{iscity,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxcs.mybatis.bean.auto.Area" >
+    insert into c_m_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="isprovince != null" >
+        isprovince,
+      </if>
+      <if test="iscity != null" >
+        iscity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isprovince != null" >
+        #{isprovince,jdbcType=INTEGER},
+      </if>
+      <if test="iscity != null" >
+        #{iscity,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxcs.mybatis.bean.auto.AreaExample" resultType="java.lang.Integer" >
+    select count(*) from c_m_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_m_area
+    <set >
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null" >
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isprovince != null" >
+        isprovince = #{record.isprovince,jdbcType=INTEGER},
+      </if>
+      <if test="record.iscity != null" >
+        iscity = #{record.iscity,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_m_area
+    set code = #{record.code,jdbcType=CHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      isprovince = #{record.isprovince,jdbcType=INTEGER},
+      iscity = #{record.iscity,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxcs.mybatis.bean.auto.Area" >
+    update c_m_area
+    <set >
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isprovince != null" >
+        isprovince = #{isprovince,jdbcType=INTEGER},
+      </if>
+      <if test="iscity != null" >
+        iscity = #{iscity,jdbcType=INTEGER},
+      </if>
+    </set>
+    where code = #{code,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxcs.mybatis.bean.auto.Area" >
+    update c_m_area
+    set `name` = #{name,jdbcType=VARCHAR},
+      isprovince = #{isprovince,jdbcType=INTEGER},
+      iscity = #{iscity,jdbcType=INTEGER}
+    where code = #{code,jdbcType=CHAR}
+  </update>
+</mapper>

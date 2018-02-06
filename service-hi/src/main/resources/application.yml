@@ -1,0 +1,59 @@
+eureka:
+  client:
+    service-url:
+     defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8080
+spring:
+  application:
+    name: service-hi
+  zipkin:
+     base-url: http://localhost:9411
+  data:
+   mongodb:
+    #uri: mongodb://zoe:qsczx#A321!@118.190.157.226:29019/baidudb?readPreference=secondaryPreferred
+    uri: mongodb://118.190.157.226:29019/db_product?readPreference=secondaryPreferred
+   elasticsearch:
+      # 集群名
+      cluster-name: my-product
+      # 连接节点,注意在集群中通信都是9300端口，否则会报错无法连接上！
+      cluster-nodes: localhost:9300
+      # 是否本地连接
+      local: false
+      repositories:
+       # 仓库中数据存储
+       enabled: true
+  datasource:
+    #url: jdbc:mysql://120.77.144.27:3306/7c7i?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round
+    #username: root
+    #password: zxs123456
+    url: jdbc:mysql://localhost:3306/7c7i?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+     initial-size: 1
+     min-idle: 1
+     max-active: 20
+     test-on-borrow: true
+     stat-view-servlet:
+      allow: true
+mybatis:
+ type-aliases-package: com.lxcs.mybatis.bean
+ mapper-locations: classpath:mybatis/xml/auto/*.xml,classpath:mybatis/xml/ext/*.xml
+mapper:
+ not-empty: false
+ identity: MYSQL
+pagehelper:
+ helperDialect: mysql
+ reasonable: true
+ supportMethodsArguments: true
+ params: count=countSql
+debug: true
+logging:
+  level:
+    root: debug
+    com:
+     lxcs:
+      mybatis:
+       mapper: trace

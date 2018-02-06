@@ -1,0 +1,13 @@
+server:
+  port: 8769
+spring:
+  profiles: peer2
+#通过eureka.client.registerWithEureka：false和fetchRegistry：false来表明自己是一个eureka server.
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    service-url:
+      defaultZone: http://peer2:8761/eureka/
+
+

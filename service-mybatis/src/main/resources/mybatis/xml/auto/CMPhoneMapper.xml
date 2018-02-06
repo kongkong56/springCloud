@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxcs.mybatis.mapper.auto.CMPhoneMapper" >
+  <resultMap id="BaseResultMap" type="com.lxcs.mybatis.bean.auto.CMPhone" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="phone_first" property="phoneFirst" jdbcType="VARCHAR" />
+    <result column="phone_provence" property="phoneProvence" jdbcType="VARCHAR" />
+    <result column="phone_city" property="phoneCity" jdbcType="VARCHAR" />
+    <result column="service" property="service" jdbcType="VARCHAR" />
+    <result column="area_number" property="areaNumber" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, phone_first, phone_provence, phone_city, service, area_number, code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lxcs.mybatis.bean.auto.CMPhoneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_m_phone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_m_phone
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_m_phone
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxcs.mybatis.bean.auto.CMPhoneExample" >
+    delete from c_m_phone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxcs.mybatis.bean.auto.CMPhone" >
+    insert into c_m_phone (id, phone_first, phone_provence, 
+      phone_city, service, area_number, 
+      code)
+    values (#{id,jdbcType=INTEGER}, #{phoneFirst,jdbcType=VARCHAR}, #{phoneProvence,jdbcType=VARCHAR}, 
+      #{phoneCity,jdbcType=VARCHAR}, #{service,jdbcType=VARCHAR}, #{areaNumber,jdbcType=INTEGER}, 
+      #{code,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxcs.mybatis.bean.auto.CMPhone" >
+    insert into c_m_phone
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="phoneFirst != null" >
+        phone_first,
+      </if>
+      <if test="phoneProvence != null" >
+        phone_provence,
+      </if>
+      <if test="phoneCity != null" >
+        phone_city,
+      </if>
+      <if test="service != null" >
+        service,
+      </if>
+      <if test="areaNumber != null" >
+        area_number,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="phoneFirst != null" >
+        #{phoneFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneProvence != null" >
+        #{phoneProvence,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneCity != null" >
+        #{phoneCity,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null" >
+        #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNumber != null" >
+        #{areaNumber,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxcs.mybatis.bean.auto.CMPhoneExample" resultType="java.lang.Integer" >
+    select count(*) from c_m_phone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_m_phone
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.phoneFirst != null" >
+        phone_first = #{record.phoneFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneProvence != null" >
+        phone_provence = #{record.phoneProvence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneCity != null" >
+        phone_city = #{record.phoneCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service != null" >
+        service = #{record.service,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaNumber != null" >
+        area_number = #{record.areaNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_m_phone
+    set id = #{record.id,jdbcType=INTEGER},
+      phone_first = #{record.phoneFirst,jdbcType=VARCHAR},
+      phone_provence = #{record.phoneProvence,jdbcType=VARCHAR},
+      phone_city = #{record.phoneCity,jdbcType=VARCHAR},
+      service = #{record.service,jdbcType=VARCHAR},
+      area_number = #{record.areaNumber,jdbcType=INTEGER},
+      code = #{record.code,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxcs.mybatis.bean.auto.CMPhone" >
+    update c_m_phone
+    <set >
+      <if test="phoneFirst != null" >
+        phone_first = #{phoneFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneProvence != null" >
+        phone_provence = #{phoneProvence,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneCity != null" >
+        phone_city = #{phoneCity,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null" >
+        service = #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNumber != null" >
+        area_number = #{areaNumber,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxcs.mybatis.bean.auto.CMPhone" >
+    update c_m_phone
+    set phone_first = #{phoneFirst,jdbcType=VARCHAR},
+      phone_provence = #{phoneProvence,jdbcType=VARCHAR},
+      phone_city = #{phoneCity,jdbcType=VARCHAR},
+      service = #{service,jdbcType=VARCHAR},
+      area_number = #{areaNumber,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

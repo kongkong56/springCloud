@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxcs.mybatis.mapper.ext.ExtUserMainMapper">
+    <resultMap id="BaseResultMap" type="com.lxcs.mybatis.bean.ext.ExtUserMain">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="department_cd" property="departmentCd" jdbcType="VARCHAR"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="manager_user_name" property="managerUserName" jdbcType="VARCHAR"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="VARCHAR"/>
+        <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userNameList" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            um.del_flag  = '0'
+            <if test="departmentCd != null and departmentCd != ''">
+                and d.department_cd = #{departmentCd}
+            </if>
+            <if test="managerUserName != null and managerUserName != ''">
+                and um.manager_user_name like CONCAT('%',#{managerUserName},'%')
+            </if>
+            <!-- 部门的过滤条件：登录用户下的所有部门 -->
+            <if test="listDepartmentCd != null and listDepartmentCd.size() > 0">
+                and um.department_cd in
+                <foreach collection="listDepartmentCd" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lxcs.mybatis.bean.ext.ExtUserMain">
+        SELECT
+            um.id,
+            um.department_cd,
+            d.department_name,
+            um.manager_user_name,
+            GROUP_CONCAT(
+                u.user_name,
+                CONCAT('(', u.real_name, ')')
+            ) user_name
+        FROM
+            c_m_user_main um
+        LEFT JOIN c_m_user_main_user umu ON umu.user_main_id = um.id
+        LEFT JOIN c_m_user u ON umu.user_id = u.user_id
+        INNER JOIN c_m_department d ON um.department_cd = d.department_cd
+        <include refid="Example_Where_Clause"/>
+        GROUP BY
+        um.id
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit #{limitStart} , #{limitEnd}
+        </if>
+    </select>
+</mapper>

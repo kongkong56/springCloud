@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxcs.mybatis.mapper.auto.CMDepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.lxcs.mybatis.bean.auto.CMDepartment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="department_cd" property="departmentCd" jdbcType="VARCHAR" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="department_leader_id" property="departmentLeaderId" jdbcType="VARCHAR" />
+    <result column="department_leader_name" property="departmentLeaderName" jdbcType="VARCHAR" />
+    <result column="department_p_cd" property="departmentPCd" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="sort_key" property="sortKey" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_group_cd" property="createGroupCd" jdbcType="VARCHAR" />
+    <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="update_group_cd" property="updateGroupCd" jdbcType="VARCHAR" />
+    <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, department_cd, department_name, department_leader_id, department_leader_name, 
+    department_p_cd, `status`, sort_key, del_flag, create_group_cd, create_user_cd, create_date, 
+    update_group_cd, update_user_cd, update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lxcs.mybatis.bean.auto.CMDepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_m_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_m_department
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_m_department
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxcs.mybatis.bean.auto.CMDepartmentExample" >
+    delete from c_m_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxcs.mybatis.bean.auto.CMDepartment" >
+    insert into c_m_department (id, department_cd, department_name, 
+      department_leader_id, department_leader_name, 
+      department_p_cd, `status`, sort_key, 
+      del_flag, create_group_cd, create_user_cd, 
+      create_date, update_group_cd, update_user_cd, 
+      update_date)
+    values (#{id,jdbcType=INTEGER}, #{departmentCd,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, 
+      #{departmentLeaderId,jdbcType=VARCHAR}, #{departmentLeaderName,jdbcType=VARCHAR}, 
+      #{departmentPCd,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{sortKey,jdbcType=INTEGER}, 
+      #{delFlag,jdbcType=VARCHAR}, #{createGroupCd,jdbcType=VARCHAR}, #{createUserCd,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=VARCHAR}, #{updateGroupCd,jdbcType=VARCHAR}, #{updateUserCd,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxcs.mybatis.bean.auto.CMDepartment" >
+    insert into c_m_department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="departmentCd != null" >
+        department_cd,
+      </if>
+      <if test="departmentName != null" >
+        department_name,
+      </if>
+      <if test="departmentLeaderId != null" >
+        department_leader_id,
+      </if>
+      <if test="departmentLeaderName != null" >
+        department_leader_name,
+      </if>
+      <if test="departmentPCd != null" >
+        department_p_cd,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+      <if test="sortKey != null" >
+        sort_key,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd,
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd,
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="departmentCd != null" >
+        #{departmentCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderId != null" >
+        #{departmentLeaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderName != null" >
+        #{departmentLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPCd != null" >
+        #{departmentPCd,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortKey != null" >
+        #{sortKey,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxcs.mybatis.bean.auto.CMDepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from c_m_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_m_department
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentCd != null" >
+        department_cd = #{record.departmentCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentName != null" >
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentLeaderId != null" >
+        department_leader_id = #{record.departmentLeaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentLeaderName != null" >
+        department_leader_name = #{record.departmentLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentPCd != null" >
+        department_p_cd = #{record.departmentPCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortKey != null" >
+        sort_key = #{record.sortKey,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createGroupCd != null" >
+        create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserCd != null" >
+        create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateGroupCd != null" >
+        update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserCd != null" >
+        update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_m_department
+    set id = #{record.id,jdbcType=INTEGER},
+      department_cd = #{record.departmentCd,jdbcType=VARCHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      department_leader_id = #{record.departmentLeaderId,jdbcType=VARCHAR},
+      department_leader_name = #{record.departmentLeaderName,jdbcType=VARCHAR},
+      department_p_cd = #{record.departmentPCd,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      sort_key = #{record.sortKey,jdbcType=INTEGER},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxcs.mybatis.bean.auto.CMDepartment" >
+    update c_m_department
+    <set >
+      <if test="departmentCd != null" >
+        department_cd = #{departmentCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderId != null" >
+        department_leader_id = #{departmentLeaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderName != null" >
+        department_leader_name = #{departmentLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPCd != null" >
+        department_p_cd = #{departmentPCd,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortKey != null" >
+        sort_key = #{sortKey,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxcs.mybatis.bean.auto.CMDepartment" >
+    update c_m_department
+    set department_cd = #{departmentCd,jdbcType=VARCHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      department_leader_id = #{departmentLeaderId,jdbcType=VARCHAR},
+      department_leader_name = #{departmentLeaderName,jdbcType=VARCHAR},
+      department_p_cd = #{departmentPCd,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      sort_key = #{sortKey,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

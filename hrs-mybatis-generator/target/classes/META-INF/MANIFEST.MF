@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Implementation-Title: hrs-mybatis-generator
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: shuai
+Implementation-Vendor-Id: com.hrs
+Build-Jdk: 1.8.0_131
+Created-By: Maven Integration for Eclipse
+

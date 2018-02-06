@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxcs.mybatis.mapper.ext.ExtAreaMapper">
+    <resultMap id="BaseResultMap" type="com.lxcs.mybatis.bean.auto.Area">
+        <id column="code" property="code" jdbcType="CHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="isprovince" property="isprovince" jdbcType="INTEGER"/>
+        <result column="iscity" property="iscity" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 获取所有的地区 -->
+    <select id="findAllList" resultMap="BaseResultMap">
+        SELECT
+        `code`,
+        `name`,
+        `isprovince`,
+        `iscity`
+        FROM `c_m_area`
+    </select>
+
+    <!-- 获取所有的省 -->
+    <select id="findProvinceList" resultMap="BaseResultMap">
+        SELECT
+        `code`,
+        `name`
+        FROM `c_m_area`
+        <where>
+            `isprovince` = 1
+        </where>
+    </select>
+
+    <!-- 获取所有的省下的市 -->
+    <select id="findCityList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        `code`,
+        `name`
+        FROM `c_m_area`
+        <where>
+            `iscity` = 1
+            AND `isprovince` = 0
+            AND LEFT(`code`, 2) = LEFT(#{code,jdbcType=CHAR}, 2)
+        </where>
+    </select>
+
+    <!-- 获取所有的市下的区 -->
+    <select id="findAreaList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        `code`,
+        `name`
+        FROM `c_m_area`
+        <where>
+            `iscity` = 0
+            AND `isprovince` = 0
+            <if test="code != null and code != ''">
+                AND LEFT(`code`, 4) = LEFT(#{code,jdbcType=CHAR}, 4)
+            </if>
+        </where>
+    </select>
+</mapper>
